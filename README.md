@@ -82,12 +82,14 @@ Proyek ini adalah sebuah aplikasi **Sistem Pembayaran SPP** berbasis terminal ya
 5. Ikuti menu interaktif di terminal untuk menggunakan fitur aplikasi.
 
 ## Kontributor
-- Ketua Kelompok: [Nama Ketua Kelompok]
+- Ketua Kelompok: Zacki Saeful Bahri
 - Anggota Kelompok:
-  1. Dhela Nurastia (10602010)
-  2. Salsa Amelia (10602050)
-  3. Sulton Sugiarta (10602052)
-  4. Zacki Saeful Bahri (10602062)
+    - Dhela Nurastia (10602010)
+    - Salsa Amelia (10602050)
+    - Sulton Sugiarta (10602052)
+    - Zacki Saeful Bahri (10602062)
+    
+       
 
 Kami percaya bahwa proyek ini adalah wujud kolaborasi dan pembelajaran yang tak ternilai. Setiap kontribusi kecil memiliki peran besar dalam menyukseskan tugas ini.
 
