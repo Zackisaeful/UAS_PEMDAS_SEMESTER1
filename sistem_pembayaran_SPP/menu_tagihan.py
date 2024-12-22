@@ -174,53 +174,83 @@ def tampil_tagihan_sudah_dibayar():
 # FUNGSI MENGEDIT DATA TAGIHAN
 # Mengedit data tagihan yang sudah terdaftar berdasarkan kode tagihan.
 def edit_tagihan():
-    kode_tagihan = input("Masukkan kode tagihan yang ingin diedit: ")
+    # Tampilkan data siswa untuk mempermudah user menentukan penagihan
+    tampil_tagihan()
 
     if not os.path.exists(FILE_NAME):
         print("File data SPP tidak ditemukan.")
         return
 
     workbook = openpyxl.load_workbook(FILE_NAME)
+    
+    # Pastikan sheet 'Tagihan' ada
     if 'Tagihan' not in workbook.sheetnames:
         print("Sheet Tagihan belum ada.")
+        workbook.close()
         return
     
-    sheet = workbook['Tagihan']
+    # Pastikan sheet 'Siswa' ada
+    if 'Siswa' not in workbook.sheetnames:
+        print("Sheet Siswa belum ada.")
+        workbook.close()
+        return
 
-    for row in sheet.iter_rows(min_row=2):
-     if str(row[0].value) == kode_tagihan:
-        no_siswa = row[1].value
-        break    
+    sheet_tagihan = workbook['Tagihan']
+    sheet_siswa = workbook['Siswa']
 
-    siswa_sheet = workbook["Siswa"]
-    angkatan_siswa = None
+    kode_tagihan = input("\nMasukkan kode tagihan yang ingin diedit: ").strip()
 
-
-    for row in siswa_sheet.iter_rows(min_row=2):
-        if str(row[0].value) == no_siswa:
-            angkatan_siswa = row[2].value
-            break    
-
-
-            
-    for row in sheet.iter_rows(min_row=2):
+    # Cari tagihan berdasarkan kode
+    tagihan_row = None
+    for row in sheet_tagihan.iter_rows(min_row=2, values_only=False):
         if str(row[0].value) == kode_tagihan:
-            no_siswa = input("Masukkan nomor siswa baru: ")
-            try:
-                jumlah_tagihan = tentukan_tagihan(angkatan_siswa)
-            except ValueError:
-                print("Jumlah tagihan harus berupa angka.")
-                return
-            bulan_spp = pilih_bulan()  
-            row[1].value = no_siswa
-            row[2].value = jumlah_tagihan
-            row[3].value = bulan_spp
-            print("Tagihan berhasil diedit.")
-            workbook.save(FILE_NAME)
-            return
+            tagihan_row = row
+            break
 
-    print("Tagihan tidak ditemukan.")
+    if not tagihan_row:
+        print("Tagihan tidak ditemukan.")
+        workbook.close()
+        return
+
+    # Input nomor siswa baru
+    no_siswa_baru = input("\nMasukkan nomor siswa baru: ").strip()
+    if not no_siswa_baru:
+        print("Nomor siswa tidak boleh kosong.")
+        workbook.close()
+        return
+
+    # Validasi apakah nomor siswa ada di sheet 'Siswa'
+    siswa_valid = False
+    angkatan_siswa = None
+    for row in sheet_siswa.iter_rows(min_row=2, values_only=True):
+        if str(row[0]) == no_siswa_baru:
+            siswa_valid = True
+            angkatan_siswa = row[2]  
+            break
+
+    if not siswa_valid:
+        print("Siswa tidak terdaftar. Masukkan nomor siswa yang benar.")
+        workbook.close()
+        return
+
+    try:
+        jumlah_tagihan = tentukan_tagihan(angkatan_siswa)
+    except ValueError:
+        print("Jumlah tagihan harus berupa angka.")
+        workbook.close()
+        return
+
+    bulan_spp = pilih_bulan()
+    tanggal = datetime.today().strftime('%Y-%m-%d') 
+
+    tagihan_row[1].value = no_siswa_baru  
+    tagihan_row[2].value = jumlah_tagihan 
+    tagihan_row[3].value = bulan_spp  
+    tagihan_row[5].value = tanggal
+
+    print("Tagihan berhasil diedit.")
     workbook.save(FILE_NAME)
+    workbook.close()
 
 
 
