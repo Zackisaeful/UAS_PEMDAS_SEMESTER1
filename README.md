@@ -67,19 +67,27 @@ Proyek ini adalah sebuah aplikasi **Sistem Pembayaran SPP** berbasis terminal ya
 
 ## 🚀 Cara Menjalankan Proyek
 1. Pastikan Python sudah terinstal di komputer Anda.
-2. Instal pustaka **OpenPyXL** dengan perintah berikut:
-   ```bash
-   pip install openpyxl
-   ```
-3. Unduh atau clone repository ini:
+2. Unduh atau clone repository ini:
    ```bash
    git clone https://github.com/Zackisaeful/UAS_PEMDAS_SEMESTER1.git
    ```
-4. Jalankan file utama aplikasi:
+3. Masuk ke folder utama proyek:
+   ```bash
+   cd UAS_PEMDAS_SEMESTER1
+   ```
+4. Masuk ke folder aplikasi:
+   ```bash
+   cd sistem_pembayaran_SPP
+   ```
+5. Instal pustaka **OpenPyXL** dengan perintah berikut:
+   ```bash
+   pip install openpyxl
+   ```
+6. Jalankan file utama aplikasi:
    ```bash
    python main.py
    ```
-5. Ikuti menu interaktif di terminal untuk menggunakan fitur aplikasi.
+7. Ikuti menu interaktif di terminal untuk menggunakan fitur aplikasi.
 
 ## Kontributor
 - Ketua Kelompok: Zacki Saeful Bahri
@@ -98,5 +106,3 @@ Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
 ---
 ✨ "Kesederhanaan adalah kecanggihan tertinggi." - Leonardo da Vinci.
-
-
