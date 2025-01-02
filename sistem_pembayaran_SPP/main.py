@@ -7,7 +7,7 @@ from menu_laporan_servis import menu_laporan_servis
 # MENGELOLA MENU UTAMA
 def menu_utama():
       while True:
-            print("\nMenu utama Perpustakaan: ")
+            print("\nMenu utama SPP: ")
             print("1. Siswa")
             print("2. Tagihan")
             print("3. Pembayaran")
