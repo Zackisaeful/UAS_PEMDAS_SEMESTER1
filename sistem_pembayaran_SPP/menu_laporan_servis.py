@@ -1,6 +1,7 @@
 import openpyxl
 import os  
 from function import print_formatted_separator
+from menu_siswa import tampil_siswa
 
 FILE_NAME = 'data_spp.xlsx'
 
@@ -41,6 +42,7 @@ def tampil_laporan_servis():
         jumlah_pembayaran = pembayaran_row[3]
         uang_diterima = pembayaran_row[4]
         kembalian = pembayaran_row[5]
+        bulan_spp = pembayaran_row[6]
 
         # Debugging
         # print(f"Nomor Siswa: {no_siswa}")
@@ -57,6 +59,7 @@ def tampil_laporan_servis():
         print("Nama Siswa:", nama_siswa)
         print("Tahun Angkatan:", tahun_angkatan)
         print("Kelas:", kelas)
+        print("Bulan SPP:", bulan_spp)
         print("Tanggal Pembayaran:", tanggal_pembayaran)  
         print("Jumlah Pembayaran:", jumlah_pembayaran)
         print("Uang Diterima:", uang_diterima)
@@ -70,7 +73,10 @@ def tampil_laporan_servis():
 # FUNGSI MENAMPILKAN LAPORAN SERVIS PER SISWA
 # Menampilkan laporan servis per siswa.
 def tampil_laporan_servis_siswa():
-    nomor_siswa = input("Masukkan nomor siswa untuk menampilkan laporan: ")
+    # Tampilkan data siswa untuk mempermudah user melihat nomor siswa
+    tampil_siswa()
+
+    nomor_siswa = input("\nMasukkan nomor siswa untuk menampilkan laporan: ")
 
     if not os.path.exists(FILE_NAME):
         print("File data SPP tidak ditemukan.")
@@ -107,6 +113,7 @@ def tampil_laporan_servis_siswa():
         jumlah_pembayaran = row[3]
         uang_diterima = row[4]
         kembalian = row[5]
+        bulan_spp = row[6]
 
         # Cek apakah nomor siswa cocok
         if no_siswa == nomor_siswa:
@@ -123,6 +130,7 @@ def tampil_laporan_servis_siswa():
             print("Nama Siswa:", nama_siswa)
             print("Tahun Angkatan:", tahun_angkatan)
             print("Kelas:", kelas)
+            print("Bulan SPP:", bulan_spp)
             print("Tanggal Pembayaran:", tanggal_pembayaran)  
             print("Jumlah Pembayaran:", jumlah_pembayaran)
             print("Uang Diterima:", uang_diterima)

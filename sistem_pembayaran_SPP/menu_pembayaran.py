@@ -29,7 +29,7 @@ def bayar_spp():
         return
 
     # Input data pembayaran
-    kode_tagihan = input("Masukkan kode tagihan: ")
+    kode_tagihan = input("\nMasukkan kode tagihan: ")
 
     # Input nominal uang
     try:
@@ -66,10 +66,6 @@ def bayar_spp():
         print("Nominal uang tidak cukup untuk membayar tagihan.")
         return
 
-    # Menambahkan data pembayaran
-    pembayaran_sheet = create_sheet_if_not_exists(workbook, 'Pembayaran', ['Kode Tagihan', 'Nomor Siswa', 'Tanggal Pembayaran', 'Jumlah tagihan', 'Uang Diterima', 'Kembalian'])
-    pembayaran_sheet.append([kode_tagihan, no_siswa, tanggal_pembayaran, jumlah_tagihan, nominal_uang, kembalian])
-
     # Mengubah status tagihan menjadi "Sudah Dibayar"
     for row in tagihan_sheet.iter_rows(min_row=2):
         if row[0].value == kode_tagihan:
@@ -77,6 +73,10 @@ def bayar_spp():
             bulan_spp = row[3].value
             status_tagihan = row[4].value
             break
+
+    # Menambahkan data pembayaran
+    pembayaran_sheet = create_sheet_if_not_exists(workbook, 'Pembayaran', ['Kode Tagihan', 'Nomor Siswa', 'Tanggal Pembayaran', 'Jumlah tagihan', 'Uang Diterima', 'Kembalian', 'Bulan SPP'])
+    pembayaran_sheet.append([kode_tagihan, no_siswa, tanggal_pembayaran, jumlah_tagihan, nominal_uang, kembalian, bulan_spp])
 
     workbook.save(FILE_NAME)
     print("Pembayaran berhasil...")
